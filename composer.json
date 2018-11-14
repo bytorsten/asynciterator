@@ -1,0 +1,29 @@
+{
+    "name": "bytorsten/asynciterator",
+    "description": "AsyncIterator for PHP",
+    "type": "library",
+    "require": {
+        "react/promise": "^2.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "AsyncIterator\\": "src/"
+        },
+        "files": ["src/functions_include.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AsyncIterator\\Tests\\": "tests/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Torsten Blindert",
+            "email": "info@by-torsten.com"
+        }
+    ]
+}

@@ -32,4 +32,19 @@ class AsyncIteratorTest extends TestCase
 
         static::assertEquals(2, $i);
     }
+
+    public function testAsyncIteratorCanBeReturned()
+    {
+        $asyncIterator = new AsyncIterator(['a', 'b', 'c']);
+
+        $i = 0;
+        foreach ($asyncIterator as $item) {
+            $i++;
+            if ($i > 1) {
+                $asyncIterator->return();
+            }
+        }
+
+        static::assertEquals(2, $i);
+    }
 }

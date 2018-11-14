@@ -39,4 +39,9 @@ class AsyncIterator implements \Iterator
     {
         $this->position = 0;
     }
+
+    public function return(): void
+    {
+        $this->position = count($this->data);
+    }
 }

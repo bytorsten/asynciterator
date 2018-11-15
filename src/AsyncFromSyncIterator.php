@@ -1,7 +1,7 @@
 <?php
 namespace AsyncIterator;
 
-use React\Promise\PromiseInterface;
+use React\Promise\ExtendedPromiseInterface;
 use function React\Promise\resolve;
 
 class AsyncFromSyncIterator implements AsyncIterator
@@ -14,25 +14,15 @@ class AsyncFromSyncIterator implements AsyncIterator
         $this->_i = $iterator;
     }
 
-    public function next(): PromiseInterface
+    public function next(): ExtendedPromiseInterface
     {
         if ($this->returned) {
-            return resolve(['done' => true]);
+            return resolve(['value' => null, 'done' => true]);
         }
 
         $step = $this->_i->next();
         return resolve($step['value'])->then(function ($value) use ($step) {
            return ['value' => $value, 'done' => $step['done']];
         });
-    }
-
-    public function throw(\Throwable $error): PromiseInterface
-    {
-        throw $error;
-    }
-
-    public function return(): PromiseInterface
-    {
-        $this->returned = true;
     }
 }

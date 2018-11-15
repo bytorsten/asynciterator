@@ -13,6 +13,10 @@ function createIterator($collection): ?Iterator {
         if (is_array($collection)) {
             return new ArrayLikeIterator($collection);
         }
+
+        if ($collection instanceof \Generator) {
+            return new GeneratorIterator($collection);
+        }
     }
 
     return null;
@@ -26,9 +30,15 @@ function createAsyncIterator($source): ?AsyncIterator {
 
         $iterator = createIterator($source);
         if ($iterator) {
+            if ($iterator instanceof ExtendedIterator) {
+                return new ExtendedAsyncFromSyncIterator($iterator);
+            }
+
             return new AsyncFromSyncIterator($iterator);
         }
     }
+
+    return null;
 }
 
 function forAwaitEach(AsyncIterator $source, callable $callback)

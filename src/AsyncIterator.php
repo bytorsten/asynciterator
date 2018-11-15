@@ -2,11 +2,9 @@
 namespace AsyncIterator;
 
 
-use React\Promise\PromiseInterface;
+use React\Promise\ExtendedPromiseInterface;
 
 interface AsyncIterator
 {
-    public function next(): PromiseInterface;
-    public function return(): PromiseInterface;
-    public function throw(\Throwable $error): PromiseInterface;
+    public function next(): ExtendedPromiseInterface;
 }
